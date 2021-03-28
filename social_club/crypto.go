@@ -1,3 +1,7 @@
+/*
+	This file implements the encryption standard used to encrypt sensitive data in requests
+	to the Social Club server. This standard has been reversed from GTA:SA code.
+*/
 package social_club
 
 import (

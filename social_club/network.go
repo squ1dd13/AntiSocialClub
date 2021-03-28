@@ -124,7 +124,31 @@ func (session *Session) User() UserAccount {
 	return session.initialLoginResponse.RockstarAccount
 }
 
-func (session *Session) expirationTime() int64 {
+func (session *Session) ticket() string {
+	return session.initialLoginResponse.Ticket
+}
+
+func (session *Session) CreateUrl(differentiator string) string {
+	const format = "http://prod.ros.rockstargames.com/cloud/11/cloudservices/members/sc/%s%s?%s"
+
+	query := url.Values{
+		"ticket": {session.ticket()},
+	}
+
+	return fmt.Sprintf(format, session.User().RockstarId, differentiator, query.Encode())
+}
+
+func (session *Session) Fetch(differentiator string) ([]byte, error) {
+	response, err := http.Get(session.CreateUrl(differentiator))
+
+	if err != nil {
+		return nil, err
+	}
+
+	return ioutil.ReadAll(response.Body)
+}
+
+func (session *Session) ExpirationTime() int64 {
 	if session.cachedExpirationTime != 0 {
 		return session.cachedExpirationTime
 	}
@@ -147,7 +171,7 @@ func (session *Session) expirationTime() int64 {
 }
 
 func (session *Session) Expired() bool {
-	return time.Now().Unix() >= session.expirationTime()
+	return time.Now().Unix() >= session.ExpirationTime()
 }
 
 func LogIn(email string, password string) (*Session, error) {
