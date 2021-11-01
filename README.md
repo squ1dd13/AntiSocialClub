@@ -22,3 +22,4 @@ to the other files could be interesting for players of other Rockstar titles as 
 - `social_club/crypto.go` - a Go implementation of the Social Club encryption algorithm
 - `social_club/filesystem.go` - provides an interface for interacting with user files
 - `social_club/network.go` - facilitates starting a new session (authentication etc.) and provides networking utils
+- `interaction.go` - general user input stuff
