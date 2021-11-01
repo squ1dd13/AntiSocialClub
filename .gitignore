@@ -1,3 +1,6 @@
 .vscode/
 .gitignore
 README.md
+.dumpy/
+dump/
+*.exe

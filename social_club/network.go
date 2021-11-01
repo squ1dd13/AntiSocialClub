@@ -5,6 +5,7 @@ import (
 	"encoding/gob"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -145,7 +146,7 @@ func (session *Session) Fetch(differentiator string) ([]byte, error) {
 		return nil, err
 	}
 
-	return ioutil.ReadAll(response.Body)
+	return io.ReadAll(response.Body)
 }
 
 func (session *Session) ExpirationTime() int64 {
@@ -222,7 +223,6 @@ func LogIn(email string, password string) (*Session, error) {
 
 	// The response will be encrypted, so we have to decrypt it.
 	responseXml, err := decrypt(key, responseBytes)
-	fmt.Println(responseXml)
 
 	if err != nil {
 		return nil, err
