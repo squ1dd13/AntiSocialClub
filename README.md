@@ -8,7 +8,8 @@ AntiSocialClub provides no facilities for accessing any account other than one w
 
 The program currently works pretty badly. Within the year (or so) where I didn't touch this project, something seems to
 have changed about how the Social Club works, and it now takes two or three attempts to fully authenticate with the server
-and dump the user files. Hopefully I'll get round to fixing that at some point.
+and dump the user files. Hopefully I'll get round to fixing that at some point. (In all honesty, the whole project needs
+refactoring because it's a bit of a mess, despite how small it is.)
 
 ## Why?
 In late 2020, I started wondering how hard it would be to write a program that could modify the GTA:SA save files on
